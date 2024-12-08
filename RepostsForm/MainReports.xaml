@@ -1,0 +1,74 @@
+﻿<Window x:Class="PersonnelDepartment.RepostsForm.MainReports"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonnelDepartment.RepostsForm"
+        mc:Ignorable="d"
+         WindowState="Maximized"
+        Title="Отчёты" Height="720" Width="1280">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="62"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.ColumnSpan="2" Background="#E4EDF3"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20 0 0 0">
+                <Button FontSize="20" VerticalAlignment="Center" Content="Отдел кадров" Style="{StaticResource ButtonMain}" x:Name="MainWindowBtn" Click="MainWindowBtn_Click"/>
+                <Button Content="Сотрудники"  Style="{StaticResource ButtonMain}" x:Name="StaffBtn" Click="StaffBtn_Click" />
+                <Button Content="Трудовые книжки" Style="{StaticResource ButtonMain}" x:Name="EmploymentRecordBtn" Click="EmploymentRecordBtn_Click"/>
+                <Button Content="Приказы" Style="{StaticResource ButtonMain}" x:Name="OrdersBtn" Click="OrdersBtn_Click"/>
+                <Button Content="Отчеты"  Style="{StaticResource ButtonMain}"/>
+                <Button Content="Отмена"  Grid.Row="0" Width="86" Height="32" HorizontalAlignment="Left" Margin="27,0,0,0" Style="{StaticResource MainButton}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" MinWidth="130" Grid.Column="1" Margin="0 0 20 0">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                    <Label x:Name="Namelbl" Content="Имя Фамилия" FontSize="14" Margin="0,0,32,0"/>
+                    <Label x:Name="Rolelbl" Content="Должность" FontSize="12" Margin="0,0,32,0"/>
+                </StackPanel>
+                <!--<Image Width="32" Height="32"/>-->
+                <Button Content="Выйти" Width="66" Height="32" Style="{StaticResource ExitButton}" x:Name="ExitBtn" Click="ExitBtn_Click" Grid.Column="1"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid>
+            <StackPanel Orientation="Vertical" Background="#FFFF"  Height="642" Width="1280" Margin="0,62,0,0">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="Добавить отчет" FontSize="18" Margin="0,29,0,15"/>
+                    <Label Content="Выбрать тип отчета" FontSize="16" Margin="0,0,0,15"/>
+                    <ComboBox Width="367" SelectionChanged="ReportsCmd_SelectionChanged" x:Name="ReportsCmd" Height="32">
+                        <ComboBoxItem Content="Список сотрудников"/>
+                        <ComboBoxItem Content="Список сотрудников по отделам"/>
+                        <ComboBoxItem Content="Список сотрудников с детьми"/>
+                        <ComboBoxItem Content="Список военнообязанных сотрудников"/>
+                    </ComboBox>
+                    <Label Margin="0,15,0,9" FontSize="16" Content="Период отчета"/>
+                    <StackPanel Margin="0,0,0,7" Orientation="Horizontal">
+                        <Label Margin="0,0,82,0" Content="Начало периода"/>
+                        <Label Content="Конец периода"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <DatePicker x:Name="StartDatePicker" Width="173" Height="32" Margin="0,0,14,0"/>
+                        <DatePicker x:Name="EndDatePicker" Width="173" Height="32"/>
+                    </StackPanel>
+                    <StackPanel x:Name="PostSkP" Margin="0,15,0,15" Visibility="Collapsed">
+                    <Label FontSize="16" Margin="0,0,0,15" Content="Выбрать отдел"/>
+                        <ComboBox Width="367" Height="32" x:Name="PostCmd"/>
+                    </StackPanel>
+                </StackPanel>
+               
+            </StackPanel>
+            <StackPanel VerticalAlignment="Bottom">
+            <Button Width="276" Height="32" Margin="0,300,0,39" Style="{StaticResource MainButton}" x:Name="ReportBtn" Click="ReportBtn_Click" Content="Просмотр в Excel"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

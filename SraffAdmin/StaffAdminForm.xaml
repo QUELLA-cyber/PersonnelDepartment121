@@ -1,0 +1,173 @@
+﻿<Window x:Class="PersonnelDepartment.SraffAdmin.StaffAdminForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonnelDepartment.SraffAdmin"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        xmlns:conv="clr-namespace:PersonnelDepartment.Converter"
+        Title="Сотрудники" Height="720" Width="1280">
+    <Window.Resources>
+        <conv:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="62"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.ColumnSpan="2" Background="#E4EDF3"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20 0 0 0">
+                <Button FontSize="20" VerticalAlignment="Center" Content="Отдел кадров" Style="{StaticResource ButtonMain}" x:Name="MainWindowBtn" Click="MainWindowBtn_Click"/>
+                <Button Content="Сотрудники"  Style="{StaticResource ButtonMain}"/>
+                <Button Content="База данных" Style="{StaticResource ButtonMain}" x:Name="EmploymentRecordBtn" Click="EmploymentRecordBtn_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" MinWidth="130" Grid.Column="1" Margin="0 0 20 0">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                    <Label x:Name="Namelbl" Content="Имя Фамилия" FontSize="14"/>
+                    <Label x:Name="Rolelbl" Content="Должность" FontSize="12"/>
+                </StackPanel>
+                <Image Width="32" Height="32"/>
+                <Button Content="Выйти" Width="66" Height="32" Style="{StaticResource ExitButton}" x:Name="ExitBtn" Grid.Column="1"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid>
+            <StackPanel Orientation="Vertical"  Background="#FFFF"  Height="642" Width="1280" Margin="0,62,0,0" Grid.ColumnSpan="7">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+
+                    <StackPanel>
+                        <Label/>
+                        <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 15">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="174">
+                                <Label Content="Аватар" FontSize="12" HorizontalAlignment="Left" Margin="0, 0, 0, 10"/>
+                                <Image x:Name="AvatarImage" Width="80" Height="80" Source="../Media/template.png" HorizontalAlignment="Left" Margin="10, 0, 0, 0"/>
+                            </StackPanel>
+
+
+                            <!--Имя, Фамилия, Отчество-->
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0, 0, 19, 0">
+                                        <Label Content="Имя" FontSize="12"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                        <Label Content="Фамилия" FontSize="12"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0, 0, 19, 0">
+                                    <Label Content="Отчество" FontSize="12"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical"  Background="#FFFF"  Height="642" Width="1280" Margin="0,62,0,0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBox x:Name="SearchTextBox" Style="{StaticResource CenteredTextBox}" Width="320" Height="32" Margin="0,52,16,27"/>
+                    <Button Width="86" Height="32" Margin="0, 53, 0,27" Content="Найти" x:Name="SearchBtn" Style="{StaticResource MainButton}" Click="SearchBtn_Click" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <StackPanel Width="882" HorizontalAlignment="Left">
+                        <Label Content="Личные карточки сотрудников" FontWeight="DemiBold" FontSize="18" Margin="40,0,0,15"/>
+                        <ListView Width="842" Height="450" x:Name="EmployeeListView1" Style="{StaticResource ListViewSt}"  Margin="40,0,0,0" SelectionChanged="EmployeeListView1_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Имя сотрудника" DisplayMemberBinding="{Binding FullName}" Width="200"/>
+                                    <GridViewColumn Header="Должность" DisplayMemberBinding="{Binding Position}" Width="150"/>
+                                    <GridViewColumn Header="Отдел" DisplayMemberBinding="{Binding Department}" Width="150"/>
+                                    <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding Phone}" Width="150"/>
+                                    <GridViewColumn Header="Дата рождения" DisplayMemberBinding="{Binding BirthDate, StringFormat=dd.MM.yyyy}" Width="150"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                    <StackPanel Margin="10,0,0,0">
+                        <Label Content="Личные данные" FontWeight="DemiBold" Margin="0,47,0,0"/>
+                        <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 15">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="120">
+
+                                <Image Source="{Binding SelectedEmployee.PhotoData, Converter={StaticResource ByteArrayToImageConverter}}" Width="80" Height="80" HorizontalAlignment="Left" Margin="10, 0, 0, 0"/>
+                            </StackPanel>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <!--Имя, Фамилия, Отчество-->
+
+                                <Label Content="Имя" FontSize="12" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" FontWeight="Medium"/>
+                                <Label Content="{Binding SelectedEmployee.FirstName}"  Grid.Row="1" Grid.Column="0" FontSize="12" HorizontalAlignment="Left"/>
+
+                                <Label Content="Фамилия" FontSize="12" Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Left" FontWeight="Medium"/>
+                                <Label Content="{Binding SelectedEmployee.LastName}" FontSize="12" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
+
+                                <Label Content="Отчество" FontSize="12"  Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Left" FontWeight="Medium"/>
+                                <Label Content="{Binding SelectedEmployee.Patronymic}"   Grid.Row="3" Grid.Column="0" FontSize="12" HorizontalAlignment="Left"/>
+
+                                <Label Content="Дата рождения" FontSize="12"  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" FontWeight="Medium"/>
+                                <Label Content="{Binding SelectedEmployee.BirthDate, StringFormat=dd.MM.yyyy}" Grid.Row="3" Grid.Column="1" FontSize="12" HorizontalAlignment="Left"/>
+
+                                <Label Content="Должность" FontSize="12" Grid.Row="4" Grid.Column="0"  HorizontalAlignment="Left" FontWeight="Medium"/>
+                                <Label Content="{Binding SelectedEmployee.Position}"  Grid.Row="5" Grid.Column="0" FontSize="12" HorizontalAlignment="Left"/>
+
+                                <Label Content="Отдел" FontSize="12"  Grid.Row="4" Grid.Column="1"  HorizontalAlignment="Left" FontWeight="Medium"/>
+                                <Label Content="{Binding SelectedEmployee.Department}" Grid.Row="5" Grid.Column="1" FontSize="12" HorizontalAlignment="Left"/>
+                            </Grid>
+                        </StackPanel>
+                    
+
+
+
+                    <Label Content="Назначить учётные данные" FontSize="16" FontWeight="DemiBold"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Текущий логин сотрудника: "/>
+                        <Label Content="{Binding SelectedEmployee.Login}" FontSize="12"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Текущий пароль сотрудника: "/>
+                        <Label Content="{Binding SelectedEmployee.Password}" FontSize="12"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Логин" Margin="0,15,110,0"/>
+                        <Label Content="Пароль"  Margin="0,15,0,0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="140" Height="32" Style="{StaticResource CenteredTextBox}" Margin="0,0,15,0" x:Name="LoginTextBox" Text="{Binding SelectedEmployee.Login, Mode=TwoWay}"/>
+                        <TextBox Width="174" Height="32" Style="{StaticResource CenteredTextBox}" x:Name="PasswordTextBox" Text="{Binding SelectedEmployee.Password, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <Label Content="Назначить роль в системе" FontSize="16" FontWeight="DemiBold" />
+                    <Label Content="Роль сотрудника"/>
+                    <ComboBox x:Name="PositionComboBox" SelectedItem="{Binding SelectedEmployee.Position, Mode=TwoWay}"  ItemsSource="{Binding Roles}" />
+                    <Button Width="276" Height="32" Style="{StaticResource MainButton}" Content="Подтвердить изменения" VerticalAlignment="Bottom" Margin="0,20,0,0" x:Name="SaveChanges" Click="SaveChanges_Click"/>
+                </StackPanel>
+            </StackPanel>
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+</Window>

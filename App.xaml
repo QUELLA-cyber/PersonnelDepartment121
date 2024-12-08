@@ -1,0 +1,130 @@
+﻿<Application x:Class="PersonnelDepartment.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PersonnelDepartment"
+             StartupUri="AutorizationForm.xaml">
+    <Application.Resources>
+        <Style TargetType="Button" x:Key="MainButton">
+            <Setter Property="Background" Value="#4F52B2"/>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         BorderThickness="{TemplateBinding BorderThickness}"
+                         CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBox" x:Key="CenteredTextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="DataGridRow" x:Key="StyledGridRow">
+            <Setter Property="Background" Value="#E4EDF3" />
+        </Style>
+        <Style x:Key="ButtonMain" TargetType="Button">
+            <Setter Property="Background" Value="#E4EDF3"/>
+            <Setter Property="BorderBrush" Value="#E4EDF3"/>
+            <Setter Property="Padding" Value="12 0 12 0"/>
+            <!--<Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            --><!-- Передаём Padding в ContentPresenter --><!--
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                      VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            --><!-- Удаляем любые триггеры для IsMouseOver --><!--
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>-->
+        </Style>
+        <Style TargetType="Button" x:Key="ExitButton">
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#C7C7C7"/>
+            <Setter Property="Padding" Value="12 0 12 0"/>
+        </Style>
+        <Style TargetType="ComboBox" x:Key="MainComboBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <!-- Содержимое будет в первой колонке -->
+                                <ColumnDefinition Width="*" />
+                                <!-- Стрелка будет во второй колонке -->
+                                <ColumnDefinition Width="30" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Отображение выбранного значения -->
+                            <TextBox 
+                        Grid.Column="0" 
+                        Name="ContentPresenter"
+                        Text="{Binding SelectedValue, RelativeSource={RelativeSource TemplatedParent}}"
+                        IsReadOnly="True" 
+                        Background="Transparent"
+                        BorderThickness="0"
+                        VerticalContentAlignment="Center"
+                        Margin="5,0,0,0" />
+
+                            <!-- Кнопка с изображением стрелочки -->
+                            <ToggleButton Name="ToggleButton"
+                          Grid.Column="1"
+                          Focusable="False"
+                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                          ClickMode="Press"
+                          Background="Transparent"
+                          BorderBrush="Transparent"
+                          BorderThickness="3">
+                                <Path x:Name="Arrow"
+                      Width="10"
+                      Height="6"
+                      Fill="Black"
+                      Data="M 0 0 L 4 4 L 8 0 Z"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"/>
+                            </ToggleButton>
+
+                            <!-- Popup для выпадающего списка -->
+                            <Popup Name="Popup"
+                   Placement="Bottom"
+                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                   AllowsTransparency="True"
+                   Focusable="False"
+                   PopupAnimation="Fade">
+                                <Grid Name="DropDown"
+                      SnapsToDevicePixels="True"
+                      MinWidth="{TemplateBinding ActualWidth}"
+                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border Background="White"
+                            BorderBrush="Gray"
+                            BorderThickness="1">
+                                        <ScrollViewer Margin="4" SnapsToDevicePixels="True">
+                                            <StackPanel IsItemsHost="True"
+                                        KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ListViewSt" TargetType="ListView">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </Application.Resources>
+</Application>

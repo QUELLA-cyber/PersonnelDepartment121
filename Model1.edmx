@@ -1,0 +1,746 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище HumanResourcesDepartmentModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Citizenship">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Responsibilities" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Education">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Levell" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Entry_in_the_work_book">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_personal_card" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id_mixing" Type="int" />
+        </EntityType>
+        <EntityType Name="Mixing">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Personal_card">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_of_birth" Type="date" />
+          <Property Name="Series_and_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Issued_by_whom" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_of_issue" Type="date" />
+          <Property Name="Registration_address" Type="nvarchar" MaxLength="255" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Children" Type="bit" />
+          <Property Name="Military_service" Type="bit" />
+          <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id_citizenship" Type="int" />
+          <Property Name="Id_post" Type="int" />
+          <Property Name="Id_education" Type="int" />
+          <Property Name="Birthplace" Type="nvarchar" MaxLength="250" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" />
+          <Property Name="EducationInstitution" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Base_salary" Type="float" />
+          <Property Name="Id_department" Type="int" />
+        </EntityType>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_personal_card" Type="int" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Id_salary_type" Type="int" />
+        </EntityType>
+        <EntityType Name="Salary_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Entry_in_the_work_book_Mixing">
+          <End Role="Mixing" Type="Self.Mixing" Multiplicity="0..1" />
+          <End Role="Entry_in_the_work_book" Type="Self.Entry_in_the_work_book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mixing">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Entry_in_the_work_book">
+              <PropertyRef Name="Id_mixing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entry_in_the_work_book_Personal_card">
+          <End Role="Personal_card" Type="Self.Personal_card" Multiplicity="0..1" />
+          <End Role="Entry_in_the_work_book" Type="Self.Entry_in_the_work_book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_card">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Entry_in_the_work_book">
+              <PropertyRef Name="Id_personal_card" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_card_Citizenship">
+          <End Role="Citizenship" Type="Self.Citizenship" Multiplicity="0..1" />
+          <End Role="Personal_card" Type="Self.Personal_card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citizenship">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Personal_card">
+              <PropertyRef Name="Id_citizenship" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_card_Education">
+          <End Role="Education" Type="Self.Education" Multiplicity="0..1" />
+          <End Role="Personal_card" Type="Self.Personal_card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Education">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Personal_card">
+              <PropertyRef Name="Id_education" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_card_Post1">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Personal_card" Type="Self.Personal_card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Personal_card">
+              <PropertyRef Name="Id_post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Post_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="Id_department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salary_Personal_card">
+          <End Role="Personal_card" Type="Self.Personal_card" Multiplicity="0..1" />
+          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_card">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="Id_personal_card" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salary_Salary_type">
+          <End Role="Salary_type" Type="Self.Salary_type" Multiplicity="0..1" />
+          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salary_type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="Id_salary_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище HumanResourcesDepartmentModelContainer">
+          <EntitySet Name="Citizenship" EntityType="Self.Citizenship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entry_in_the_work_book" EntityType="Self.Entry_in_the_work_book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mixing" EntityType="Self.Mixing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personal_card" EntityType="Self.Personal_card" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salary_type" EntityType="Self.Salary_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Entry_in_the_work_book_Mixing" Association="Self.FK_Entry_in_the_work_book_Mixing">
+            <End Role="Mixing" EntitySet="Mixing" />
+            <End Role="Entry_in_the_work_book" EntitySet="Entry_in_the_work_book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entry_in_the_work_book_Personal_card" Association="Self.FK_Entry_in_the_work_book_Personal_card">
+            <End Role="Personal_card" EntitySet="Personal_card" />
+            <End Role="Entry_in_the_work_book" EntitySet="Entry_in_the_work_book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_card_Citizenship" Association="Self.FK_Personal_card_Citizenship">
+            <End Role="Citizenship" EntitySet="Citizenship" />
+            <End Role="Personal_card" EntitySet="Personal_card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_card_Education" Association="Self.FK_Personal_card_Education">
+            <End Role="Education" EntitySet="Education" />
+            <End Role="Personal_card" EntitySet="Personal_card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_card_Post1" Association="Self.FK_Personal_card_Post1">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Personal_card" EntitySet="Personal_card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Post_Department" Association="Self.FK_Post_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salary_Personal_card" Association="Self.FK_Salary_Personal_card">
+            <End Role="Personal_card" EntitySet="Personal_card" />
+            <End Role="Salary" EntitySet="Salary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salary_Salary_type" Association="Self.FK_Salary_Salary_type">
+            <End Role="Salary_type" EntitySet="Salary_type" />
+            <End Role="Salary" EntitySet="Salary" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HumanResourcesDepartmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HumanResourcesDepartmentEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(HumanResourcesDepartmentModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(HumanResourcesDepartmentModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Citizenship" EntityType="HumanResourcesDepartmentModel.Citizenship" />
+          <EntitySet Name="Department" EntityType="HumanResourcesDepartmentModel.Department" />
+          <EntitySet Name="Education" EntityType="HumanResourcesDepartmentModel.Education" />
+          <EntitySet Name="Entry_in_the_work_book" EntityType="HumanResourcesDepartmentModel.Entry_in_the_work_book" />
+          <EntitySet Name="Mixing" EntityType="HumanResourcesDepartmentModel.Mixing" />
+          <EntitySet Name="Personal_card" EntityType="HumanResourcesDepartmentModel.Personal_card" />
+          <EntitySet Name="Post" EntityType="HumanResourcesDepartmentModel.Post" />
+          <EntitySet Name="Salary" EntityType="HumanResourcesDepartmentModel.Salary" />
+          <EntitySet Name="Salary_type" EntityType="HumanResourcesDepartmentModel.Salary_type" />
+          <EntitySet Name="sysdiagrams" EntityType="HumanResourcesDepartmentModel.sysdiagrams" />
+          <AssociationSet Name="FK_Personal_card_Citizenship" Association="HumanResourcesDepartmentModel.FK_Personal_card_Citizenship">
+            <End Role="Citizenship" EntitySet="Citizenship" />
+            <End Role="Personal_card" EntitySet="Personal_card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Post_Department" Association="HumanResourcesDepartmentModel.FK_Post_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_card_Education" Association="HumanResourcesDepartmentModel.FK_Personal_card_Education">
+            <End Role="Education" EntitySet="Education" />
+            <End Role="Personal_card" EntitySet="Personal_card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entry_in_the_work_book_Mixing" Association="HumanResourcesDepartmentModel.FK_Entry_in_the_work_book_Mixing">
+            <End Role="Mixing" EntitySet="Mixing" />
+            <End Role="Entry_in_the_work_book" EntitySet="Entry_in_the_work_book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entry_in_the_work_book_Personal_card" Association="HumanResourcesDepartmentModel.FK_Entry_in_the_work_book_Personal_card">
+            <End Role="Personal_card" EntitySet="Personal_card" />
+            <End Role="Entry_in_the_work_book" EntitySet="Entry_in_the_work_book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_card_Post1" Association="HumanResourcesDepartmentModel.FK_Personal_card_Post1">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Personal_card" EntitySet="Personal_card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salary_Personal_card" Association="HumanResourcesDepartmentModel.FK_Salary_Personal_card">
+            <End Role="Personal_card" EntitySet="Personal_card" />
+            <End Role="Salary" EntitySet="Salary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salary_Salary_type" Association="HumanResourcesDepartmentModel.FK_Salary_Salary_type">
+            <End Role="Salary_type" EntitySet="Salary_type" />
+            <End Role="Salary" EntitySet="Salary" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Citizenship">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Personal_card" Relationship="HumanResourcesDepartmentModel.FK_Personal_card_Citizenship" FromRole="Citizenship" ToRole="Personal_card" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Responsibilities" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Post" Relationship="HumanResourcesDepartmentModel.FK_Post_Department" FromRole="Department" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="Education">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Levell" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Personal_card" Relationship="HumanResourcesDepartmentModel.FK_Personal_card_Education" FromRole="Education" ToRole="Personal_card" />
+        </EntityType>
+        <EntityType Name="Entry_in_the_work_book">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_personal_card" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Reason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_mixing" Type="Int32" />
+          <NavigationProperty Name="Mixing" Relationship="HumanResourcesDepartmentModel.FK_Entry_in_the_work_book_Mixing" FromRole="Entry_in_the_work_book" ToRole="Mixing" />
+          <NavigationProperty Name="Personal_card" Relationship="HumanResourcesDepartmentModel.FK_Entry_in_the_work_book_Personal_card" FromRole="Entry_in_the_work_book" ToRole="Personal_card" />
+        </EntityType>
+        <EntityType Name="Mixing">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Entry_in_the_work_book" Relationship="HumanResourcesDepartmentModel.FK_Entry_in_the_work_book_Mixing" FromRole="Mixing" ToRole="Entry_in_the_work_book" />
+        </EntityType>
+        <EntityType Name="Personal_card">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_of_birth" Type="DateTime" Precision="0" />
+          <Property Name="Series_and_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Issued_by_whom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_of_issue" Type="DateTime" Precision="0" />
+          <Property Name="Registration_address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Children" Type="Boolean" />
+          <Property Name="Military_service" Type="Boolean" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_citizenship" Type="Int32" />
+          <Property Name="Id_post" Type="Int32" />
+          <Property Name="Id_education" Type="Int32" />
+          <Property Name="Birthplace" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="EducationInstitution" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Citizenship" Relationship="HumanResourcesDepartmentModel.FK_Personal_card_Citizenship" FromRole="Personal_card" ToRole="Citizenship" />
+          <NavigationProperty Name="Education" Relationship="HumanResourcesDepartmentModel.FK_Personal_card_Education" FromRole="Personal_card" ToRole="Education" />
+          <NavigationProperty Name="Entry_in_the_work_book" Relationship="HumanResourcesDepartmentModel.FK_Entry_in_the_work_book_Personal_card" FromRole="Personal_card" ToRole="Entry_in_the_work_book" />
+          <NavigationProperty Name="Post" Relationship="HumanResourcesDepartmentModel.FK_Personal_card_Post1" FromRole="Personal_card" ToRole="Post" />
+          <NavigationProperty Name="Salary" Relationship="HumanResourcesDepartmentModel.FK_Salary_Personal_card" FromRole="Personal_card" ToRole="Salary" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Base_salary" Type="Double" />
+          <Property Name="Id_department" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="HumanResourcesDepartmentModel.FK_Post_Department" FromRole="Post" ToRole="Department" />
+          <NavigationProperty Name="Personal_card" Relationship="HumanResourcesDepartmentModel.FK_Personal_card_Post1" FromRole="Post" ToRole="Personal_card" />
+        </EntityType>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_personal_card" Type="Int32" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Id_salary_type" Type="Int32" />
+          <NavigationProperty Name="Personal_card" Relationship="HumanResourcesDepartmentModel.FK_Salary_Personal_card" FromRole="Salary" ToRole="Personal_card" />
+          <NavigationProperty Name="Salary_type" Relationship="HumanResourcesDepartmentModel.FK_Salary_Salary_type" FromRole="Salary" ToRole="Salary_type" />
+        </EntityType>
+        <EntityType Name="Salary_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Salary" Relationship="HumanResourcesDepartmentModel.FK_Salary_Salary_type" FromRole="Salary_type" ToRole="Salary" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Personal_card_Citizenship">
+          <End Type="HumanResourcesDepartmentModel.Citizenship" Role="Citizenship" Multiplicity="0..1" />
+          <End Type="HumanResourcesDepartmentModel.Personal_card" Role="Personal_card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citizenship">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Personal_card">
+              <PropertyRef Name="Id_citizenship" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Post_Department">
+          <End Type="HumanResourcesDepartmentModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="HumanResourcesDepartmentModel.Post" Role="Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="Id_department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_card_Education">
+          <End Type="HumanResourcesDepartmentModel.Education" Role="Education" Multiplicity="0..1" />
+          <End Type="HumanResourcesDepartmentModel.Personal_card" Role="Personal_card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Education">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Personal_card">
+              <PropertyRef Name="Id_education" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entry_in_the_work_book_Mixing">
+          <End Type="HumanResourcesDepartmentModel.Mixing" Role="Mixing" Multiplicity="0..1" />
+          <End Type="HumanResourcesDepartmentModel.Entry_in_the_work_book" Role="Entry_in_the_work_book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mixing">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Entry_in_the_work_book">
+              <PropertyRef Name="Id_mixing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entry_in_the_work_book_Personal_card">
+          <End Type="HumanResourcesDepartmentModel.Personal_card" Role="Personal_card" Multiplicity="0..1" />
+          <End Type="HumanResourcesDepartmentModel.Entry_in_the_work_book" Role="Entry_in_the_work_book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_card">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Entry_in_the_work_book">
+              <PropertyRef Name="Id_personal_card" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_card_Post1">
+          <End Type="HumanResourcesDepartmentModel.Post" Role="Post" Multiplicity="0..1" />
+          <End Type="HumanResourcesDepartmentModel.Personal_card" Role="Personal_card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Personal_card">
+              <PropertyRef Name="Id_post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salary_Personal_card">
+          <End Type="HumanResourcesDepartmentModel.Personal_card" Role="Personal_card" Multiplicity="0..1" />
+          <End Type="HumanResourcesDepartmentModel.Salary" Role="Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_card">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="Id_personal_card" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salary_Salary_type">
+          <End Type="HumanResourcesDepartmentModel.Salary_type" Role="Salary_type" Multiplicity="0..1" />
+          <End Type="HumanResourcesDepartmentModel.Salary" Role="Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salary_type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="Id_salary_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище HumanResourcesDepartmentModelContainer" CdmEntityContainer="HumanResourcesDepartmentEntities">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище HumanResourcesDepartmentModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище HumanResourcesDepartmentModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище HumanResourcesDepartmentModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище HumanResourcesDepartmentModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HumanResourcesDepartmentModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище HumanResourcesDepartmentModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HumanResourcesDepartmentModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище HumanResourcesDepartmentModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище HumanResourcesDepartmentModel.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Citizenship">
+            <EntityTypeMapping TypeName="HumanResourcesDepartmentModel.Citizenship">
+              <MappingFragment StoreEntitySet="Citizenship">
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="HumanResourcesDepartmentModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Responsibilities" ColumnName="Responsibilities" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Education">
+            <EntityTypeMapping TypeName="HumanResourcesDepartmentModel.Education">
+              <MappingFragment StoreEntitySet="Education">
+                <ScalarProperty Name="Levell" ColumnName="Levell" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entry_in_the_work_book">
+            <EntityTypeMapping TypeName="HumanResourcesDepartmentModel.Entry_in_the_work_book">
+              <MappingFragment StoreEntitySet="Entry_in_the_work_book">
+                <ScalarProperty Name="Id_mixing" ColumnName="Id_mixing" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id_personal_card" ColumnName="Id_personal_card" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mixing">
+            <EntityTypeMapping TypeName="HumanResourcesDepartmentModel.Mixing">
+              <MappingFragment StoreEntitySet="Mixing">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personal_card">
+            <EntityTypeMapping TypeName="HumanResourcesDepartmentModel.Personal_card">
+              <MappingFragment StoreEntitySet="Personal_card">
+                <ScalarProperty Name="EducationInstitution" ColumnName="EducationInstitution" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Birthplace" ColumnName="Birthplace" />
+                <ScalarProperty Name="Id_education" ColumnName="Id_education" />
+                <ScalarProperty Name="Id_post" ColumnName="Id_post" />
+                <ScalarProperty Name="Id_citizenship" ColumnName="Id_citizenship" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Military_service" ColumnName="Military_service" />
+                <ScalarProperty Name="Children" ColumnName="Children" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Registration_address" ColumnName="Registration_address" />
+                <ScalarProperty Name="Date_of_issue" ColumnName="Date_of_issue" />
+                <ScalarProperty Name="Issued_by_whom" ColumnName="Issued_by_whom" />
+                <ScalarProperty Name="Series_and_number" ColumnName="Series_and_number" />
+                <ScalarProperty Name="Date_of_birth" ColumnName="Date_of_birth" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Post">
+            <EntityTypeMapping TypeName="HumanResourcesDepartmentModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="Id_department" ColumnName="Id_department" />
+                <ScalarProperty Name="Base_salary" ColumnName="Base_salary" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salary">
+            <EntityTypeMapping TypeName="HumanResourcesDepartmentModel.Salary">
+              <MappingFragment StoreEntitySet="Salary">
+                <ScalarProperty Name="Id_salary_type" ColumnName="Id_salary_type" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Id_personal_card" ColumnName="Id_personal_card" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salary_type">
+            <EntityTypeMapping TypeName="HumanResourcesDepartmentModel.Salary_type">
+              <MappingFragment StoreEntitySet="Salary_type">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HumanResourcesDepartmentModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

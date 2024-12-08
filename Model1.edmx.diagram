@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5f8a5db48fe0466aaeab88d7739fcc15" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="HumanResourcesDepartmentModel.Citizenship" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="HumanResourcesDepartmentModel.Department" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="HumanResourcesDepartmentModel.Education" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="HumanResourcesDepartmentModel.Entry_in_the_work_book" Width="1.5" PointX="7.5" PointY="3.5" />
+        <EntityTypeShape EntityType="HumanResourcesDepartmentModel.Mixing" Width="1.5" PointX="5.25" PointY="9.875" />
+        <EntityTypeShape EntityType="HumanResourcesDepartmentModel.Personal_card" Width="1.5" PointX="5.25" PointY="1.75" />
+        <EntityTypeShape EntityType="HumanResourcesDepartmentModel.Post" Width="1.5" PointX="3" PointY="3.625" />
+        <EntityTypeShape EntityType="HumanResourcesDepartmentModel.Salary" Width="1.5" PointX="10.5" PointY="3.5" />
+        <EntityTypeShape EntityType="HumanResourcesDepartmentModel.Salary_type" Width="1.5" PointX="8.25" PointY="0.875" />
+        <EntityTypeShape EntityType="HumanResourcesDepartmentModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="7.375" />
+        <AssociationConnector Association="HumanResourcesDepartmentModel.FK_Personal_card_Citizenship" />
+        <AssociationConnector Association="HumanResourcesDepartmentModel.FK_Post_Department" />
+        <AssociationConnector Association="HumanResourcesDepartmentModel.FK_Personal_card_Education" />
+        <AssociationConnector Association="HumanResourcesDepartmentModel.FK_Entry_in_the_work_book_Mixing" />
+        <AssociationConnector Association="HumanResourcesDepartmentModel.FK_Entry_in_the_work_book_Personal_card" />
+        <AssociationConnector Association="HumanResourcesDepartmentModel.FK_Personal_card_Post1" />
+        <AssociationConnector Association="HumanResourcesDepartmentModel.FK_Salary_Personal_card" />
+        <AssociationConnector Association="HumanResourcesDepartmentModel.FK_Salary_Salary_type" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
