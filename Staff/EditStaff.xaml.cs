@@ -186,7 +186,7 @@ namespace PersonnelDepartment.Staff
 
         private void SaveEditBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+             
 
             var employeeData = AppConnect.dbModel.Personal_card.FirstOrDefault(x => x.ID == _employee.ID);
 
