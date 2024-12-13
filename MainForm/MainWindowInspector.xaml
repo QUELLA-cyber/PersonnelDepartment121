@@ -37,7 +37,7 @@
                 <Label Content="{Binding UserRole}" FontSize="12" Margin="0,0,32,0"/>
             </StackPanel>
             <!--<Image Width="32" Height="32" Source="{Binding UserImage}" />-->
-            <Button Content="Выйти" Width="66" Height="32" Style="{StaticResource ExitButton}" Command="{Binding ExitCommand}"/>
+            <Button Content="Выйти" Width="66" Height="32" Style="{StaticResource ExitButton}" Command="{Binding ExitCommand}" x:Name="ExitBtn" Click="ExitBtn_Click"/>
         </StackPanel>
 
         <Grid>

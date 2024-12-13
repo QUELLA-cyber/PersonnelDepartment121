@@ -319,11 +319,20 @@ namespace PersonnelDepartment.Staff
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Вы уверены, что хотите выйти из приложения?",
-                                                          "Подтверждение о закрытии",
-                                                          MessageBoxButton.YesNo,
-                                                          MessageBoxImage.Warning);
-            Close();
+            // Показать окно подтверждения
+            MessageBoxResult result = MessageBox.Show(
+                "Вы действительно хотите выйти?",
+                "Подтверждение выхода",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            // Проверка ответа пользователя
+            if (result == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown(); // Закрытие приложения
+            }
+            // Если пользователь нажал "Нет", ничего не делаем
         }
 
         private void DeleteEmployee(int employeeId)

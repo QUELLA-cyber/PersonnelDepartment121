@@ -47,14 +47,4 @@ namespace PersonnelDepartment.ClassHelper
             SeriesAndNumber = series + number;
         }
     }
-
-
-    //public class EntryInWorkBook
-    //{
-    //    public int Id { get; set; }
-    //    public int IdPersonalCard { get; set; }
-    //    public DateTime Date { get; set; }
-    //    public string Reason { get; set; }
-    //    public int IdMixing { get; set; }
-    //}
 }

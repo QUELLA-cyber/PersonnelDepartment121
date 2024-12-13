@@ -46,7 +46,7 @@
                     <Label Content="{Binding UserRole}" FontSize="12" Margin="0,0,32,0"/>
                 </StackPanel>
                 <!--<Image Width="32" Height="32" Source="{Binding SelectedEmployee.PhotoData, Converter={StaticResource ByteArrayToImageConverter}}"/>-->
-                <Button Content="Выйти" Width="66" Height="32" Style="{StaticResource ExitButton}" Command="{Binding ExitCommand}" Grid.Column="1"/>
+                <Button Content="Выйти" Width="66" Height="32" Style="{StaticResource ExitButton}" x:Name="ExitBtn" Click="ExitBtn_Click" Command="{Binding ExitCommand}" Grid.Column="1"/>
             </StackPanel>
         </Grid>
 

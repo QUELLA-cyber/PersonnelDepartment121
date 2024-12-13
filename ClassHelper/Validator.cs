@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using System;
+using System.Windows.Controls;
 
 namespace PersonnelDepartment.ClassHelper
 {
@@ -160,6 +161,27 @@ namespace PersonnelDepartment.ClassHelper
         public static bool IsValidCitizenship(string citizenship, out string errorMessage)
         {
             return IsValid(citizenship, NonEmptyPattern, out errorMessage, "Поле со списком «Гражданство» пустое");
+        }
+
+        // Валидация поля с фото
+        public static bool IsValidPhoto(string photoPath, out string errorMessage)
+        {
+            // Проверяем, что поле не пустое и путь к файлу корректный
+            if (string.IsNullOrWhiteSpace(photoPath))
+            {
+                errorMessage = "Выберите значение в поле «Аватар»";
+                return false;
+            }
+
+            // Проверяем, что файл существует
+            if (!System.IO.File.Exists(photoPath))
+            {
+                errorMessage = "Выберите значение в поле «Аватар»";
+                return false;
+            }
+
+            errorMessage = null;
+            return true;
         }
 
         // Валидация поля с обязательным заполнением

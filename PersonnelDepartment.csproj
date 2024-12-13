@@ -320,7 +320,6 @@
     <Compile Include="ViewModel\AuthorizationViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\MainEmploymentRecordViewModel.cs" />
-    <Compile Include="ViewModel\MainOrdersViewModel.cs" />
     <Compile Include="ViewModel\MainStaffViewModel.cs" />
     <Compile Include="ViewModel\MainWindowInspectorViewModel.cs" />
     <Page Include="AdminDataSource\DataSourceForm.xaml">
@@ -423,6 +422,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Documentation\Курсовая работа.docx" />
     <None Include="Documentation\Тест кейсы курсовой.docx" />
     <None Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -439,6 +439,8 @@
   <ItemGroup>
     <Resource Include="Media\template.png" />
     <Resource Include="ImageBtn\ImgBtn.png" />
+    <Resource Include="Media\face.jpg" />
+    <Content Include="Documentation\HumanResourcesDepartmentScript.sql" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>

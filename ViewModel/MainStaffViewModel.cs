@@ -1,15 +1,14 @@
 ﻿using PersonnelDepartment.ClassHelper;
+using PersonnelDepartment.Commands;
+using PersonnelDepartment.EmploymentRecord;
 using PersonnelDepartment.OrdersForm;
 using PersonnelDepartment.RepostsForm;
-using PersonnelDepartment.EmploymentRecord;
 using PersonnelDepartment.Staff;
-using System;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using PersonnelDepartment.Commands;
 using System.Windows.Media.Imaging;
 
 namespace PersonnelDepartment.ViewModel
@@ -102,7 +101,7 @@ namespace PersonnelDepartment.ViewModel
 
             SearchCommand = new RelayCommand(Search);
             AddStaffCommand = new RelayCommand(AddStaff);
-            ExitCommand = new RelayCommand(Exit);
+           // ExitCommand = new RelayCommand(Exit);
             AssignRewardCommand = new RelayCommand(AssignReward);
             NavigateToMainWindowCommand = new RelayCommand(NavigateToMainWindow);
             NavigateToEmploymentRecordCommand = new RelayCommand(NavigateToEmploymentRecord);
@@ -230,19 +229,19 @@ namespace PersonnelDepartment.ViewModel
 
         private void AddStaff()
         {
-            var addStaff = new AddStaff(_currentUser);           
+            var addStaff = new AddStaff(_currentUser);
             addStaff.Show();
             _currentWindow.Close();
-        }  
-
-        private void Exit()
-        {
-            var result = MessageBox.Show("Вы уверены, что хотите выйти из приложения?", "Подтверждение о закрытии", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
-            {
-                Application.Current.Shutdown();
-            }
         }
+
+        //private void Exit()
+        //{
+        //    var result = MessageBox.Show("Вы уверены, что хотите выйти из приложения?", "Подтверждение о закрытии", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        //    if (result == MessageBoxResult.Yes)
+        //    {
+        //        Application.Current.Shutdown();
+        //    }
+        //}
 
         private void AssignReward()
         {

@@ -72,7 +72,7 @@ namespace PersonnelDepartment.ViewModel
         public ICommand NavigateToOrdersCommand { get; set; }
         public ICommand NavigateToReportsCommand { get; set; }
         public ICommand NavigateToStaffCommand { get; set; }
-        public ICommand ExitApplicationCommand { get; set; }
+       // public ICommand ExitApplicationCommand { get; set; }
 
         public MainEmploymentRecordViewModel(Personal_card currentUser, Window currentWindow)
         {
@@ -96,7 +96,7 @@ namespace PersonnelDepartment.ViewModel
             NavigateToOrdersCommand = new RelayCommand(NavigateToOrders);
             NavigateToReportsCommand = new RelayCommand(NavigateToReports);
             NavigateToStaffCommand = new RelayCommand(NavigateToStaff);
-            ExitApplicationCommand = new RelayCommand(ExitApplication);
+           // ExitApplicationCommand = new RelayCommand(ExitApplication);
             
         }
 
@@ -252,12 +252,6 @@ namespace PersonnelDepartment.ViewModel
             MainStaff mainStaffWindow = new MainStaff(_currentUser);
             mainStaffWindow.Show();
             _currentWindow.Close();
-        }
-
-        private void ExitApplication()
-        {
-            MessageBox.Show("Вы уверены, что хотите выйти из приложения?", "Подтверждение о закрытии", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            Application.Current.Shutdown();
         }
     }
 }

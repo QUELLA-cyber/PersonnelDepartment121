@@ -33,7 +33,7 @@ namespace PersonnelDepartment.ViewModel
             EmploymentRecordCommand = new RelayCommand(ExecuteEmploymentRecord);
             OrdersCommand = new RelayCommand(ExecuteOrders);
             ReportCommand = new RelayCommand(ExecuteReports);
-            ExitCommand = new RelayCommand(ExecuteExit);
+            //ExitCommand = new RelayCommand(ExecuteExit);
         }
 
         public string UserName
@@ -70,7 +70,7 @@ namespace PersonnelDepartment.ViewModel
         public ICommand EmploymentRecordCommand { get; }
         public ICommand OrdersCommand { get; }
         public ICommand ReportCommand { get; }
-        public ICommand ExitCommand { get; }
+        //public ICommand ExitCommand { get; }
 
         private BitmapImage ByteArrayToBitmapImage(byte[] byteArray)
         {
@@ -111,18 +111,6 @@ namespace PersonnelDepartment.ViewModel
             MainReports mainReportsWindow = new MainReports(_currentUser);
             mainReportsWindow.Show();
             _currentWindow.Close();
-        }
-
-        private void ExecuteExit()
-        {
-            var result = MessageBox.Show("Вы уверены, что хотите выйти из приложения?",
-                                         "Подтверждение о закрытии",
-                                         MessageBoxButton.YesNo,
-                                         MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
-            {
-                Application.Current.Shutdown();
-            }
         }
     }
 }

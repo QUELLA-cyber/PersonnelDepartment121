@@ -313,5 +313,23 @@ namespace PersonnelDepartment.AdminDataSource
             mainWindowAdmin.Show();
             Close();
         }
+
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // Показать окно подтверждения
+            MessageBoxResult result = MessageBox.Show(
+                "Вы действительно хотите выйти?",
+                "Подтверждение выхода",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            // Проверка ответа пользователя
+            if (result == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown(); // Закрытие приложения
+            }
+            // Если пользователь нажал "Нет", ничего не делаем
+        }
     }
 }

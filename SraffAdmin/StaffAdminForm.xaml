@@ -37,7 +37,7 @@
                     <Label x:Name="Rolelbl" Content="Должность" FontSize="12"/>
                 </StackPanel>
                 <Image Width="32" Height="32"/>
-                <Button Content="Выйти" Width="66" Height="32" Style="{StaticResource ExitButton}" x:Name="ExitBtn" Grid.Column="1"/>
+                <Button Content="Выйти" Width="66" Height="32" Style="{StaticResource ExitButton}" x:Name="ExitBtn" Click="ExitBtn_Click" Grid.Column="1"/>
             </StackPanel>
         </Grid>
 

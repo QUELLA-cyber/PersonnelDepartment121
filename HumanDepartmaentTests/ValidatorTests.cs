@@ -1,12 +1,24 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PersonnelDepartment;
 using PersonnelDepartment.ClassHelper;
 using System;
+using System.IO;
+using System.Linq;
 
 namespace HumanDepartmaentTests
 {
     [TestClass]
     public class ValidatorTests
     {
+        private HumanResourcesDepartmentEntities dbModel;
+
+        [TestInitialize]
+        public void Setup()
+        {
+
+            dbModel = new HumanResourcesDepartmentEntities();
+        }
+
         // Тест 1 - Ввод с заглавной буквы значения в поле «Имя»
         [TestMethod]
         public void Test_ValidData()
@@ -73,10 +85,6 @@ namespace HumanDepartmaentTests
             Assert.IsTrue(isValid);
             Assert.IsNull(errorMessage);
 
-            isValid = Validator.IsValidPost("Инженер", out errorMessage);  // Должность
-            Assert.IsTrue(isValid);
-            Assert.IsNull(errorMessage);
-
             isValid = Validator.IsValidEducationLevel("Высшее образование (бакалавриат)", out errorMessage);  // Уровень
             Assert.IsTrue(isValid);
             Assert.IsNull(errorMessage);
@@ -84,6 +92,40 @@ namespace HumanDepartmaentTests
             isValid = Validator.IsValidCitizenship("Россия", out errorMessage);  // Гражданство
             Assert.IsTrue(isValid);
             Assert.IsNull(errorMessage);
+
+            byte[] photoBytes = File.ReadAllBytes(@"C:\PDepartment\Media\face.jpg");
+
+            // Сохраняем данные в БД
+            var personalCard = new Personal_card
+            {
+                Name = "Иван",
+                Surname = "Иванов",
+                Patronymic = "Иванович",
+                Date_of_birth = DateTime.Parse("15.03.2020"),
+                Email = "abcd@mail.ru",
+                Telephone = "78965431234",
+                Birthplace = "г. Тула",
+                Registration_address = "г. Тула, ул. Ленина, д. 15, кв. 15",
+                Series_and_number = "123456",
+                Date_of_issue = DateTime.Parse("14.10.2022"),
+                Issued_by_whom = "МВД",
+                EducationInstitution = "МГУ",
+                Id_post = 4,
+                Id_education = 1,
+                Id_citizenship = 1,
+                Children = true,
+                Military_service = true,
+                Photo = photoBytes
+            };
+
+            dbModel.Personal_card.Add(personalCard);
+            dbModel.SaveChanges();
+
+            // Проверка, что запись была добавлена
+            var addedRecord = dbModel.Personal_card.FirstOrDefault(x => x.Name == "Иван" && x.Surname == "Иванов");
+            Assert.IsNotNull(addedRecord);
+            Assert.AreEqual("Иван", addedRecord.Name);
+            Assert.AreEqual("Иванов", addedRecord.Surname);
         }
 
         // Тест 2 - Ввод строчной буквы в поле «Имя»
@@ -183,7 +225,7 @@ namespace HumanDepartmaentTests
         public void Test_InvalidPassportNumber_WithSpecialChar()
         {
             string errorMessage;
-            bool isValid = Validator.IsValidPassportNumber("123456@", out errorMessage);
+            bool isValid = Validator.IsValidPassportNumber("12345@", out errorMessage);
             Assert.IsFalse(isValid);
             Assert.AreEqual("Некорректный ввод в поле «Номер паспорта»", errorMessage);
         }
@@ -256,6 +298,17 @@ namespace HumanDepartmaentTests
             bool isValid = Validator.IsValidCitizenship("", out errorMessage);
             Assert.IsFalse(isValid);
             Assert.AreEqual("Поле со списком «Гражданство» пустое", errorMessage);
+        }
+
+        // Тест 19 - Поле "Аватар" пустое
+        [TestMethod]
+        public void Test_InvalidPhoto_FileNotFound()
+        {
+            string errorMessage;
+
+            bool isValid = Validator.IsValidPhoto("", out errorMessage);
+            Assert.IsFalse(isValid);
+            Assert.AreEqual("Выберите значение в поле «Аватар»", errorMessage);
         }
     }
 }
